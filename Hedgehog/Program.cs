@@ -1,23 +1,45 @@
 ﻿namespace Hedgehog
 {
-    enum colors
+    enum Colors
     {
         Red,
         Green,
         Blue
     }
+    class Playground
+    {
+        public int meetNumber {  get; set; }
+        public Colors desiredColor { get; set; }
+        public Playground(int desiredColor, int[] hedgehogsNumber)
+        {
+            this.desiredColor = (Colors)desiredColor;
+        }
+        public int startMeetings()
+        {
+            // Not implemented
+            return meetNumber;
+        }
+    }
     class Hedgehog
     {
-        public int color {  get; set; }
+        public Colors color {  get; set; }
         public Hedgehog(int color)
         {
-            this.color = color; 
+            this.color = (Colors)color;
         }
-        public void changeColor(Hedgehog otherHedgehog) 
+        public bool meetHedgehog(Hedgehog otherHedgehog) 
         { 
             if (this.color != otherHedgehog.color)
             {
-
+                Console.WriteLine("Color-changing meeting");
+                foreach (Colors color in Enum.GetValues(typeof(Colors)))
+                {
+                    //Not implemented
+                }
+            }
+            else
+            {
+                Console.WriteLine("Simple meeting");
             }
         }
     }
@@ -26,7 +48,7 @@
 
         static void Main(string[] args)
         {
-
+            Hedgehog hr = new Hedgehog(1);
         }
     }
 }
