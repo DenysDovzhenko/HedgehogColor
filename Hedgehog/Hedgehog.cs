@@ -9,29 +9,26 @@
             this.color = color;
         }
 
-        public bool meetHedgehog(Hedgehog otherHedgehog) 
+        public void MeetHedgehog(Hedgehog otherHedgehog) 
         { 
             if (this.color != otherHedgehog.color)
             {
-                Colors rightColor = changeColor(this.color, otherHedgehog.color);
-                this.color = rightColor;
-                otherHedgehog.color = rightColor;
-                return true;
+                Colors newColor = PickColor(this.color, otherHedgehog.color);
+                this.color = newColor;
+                otherHedgehog.color = newColor;
             }
             else
             {
-                return false;
+                throw new HedgehogException("Hedgehogs cannot change with same color");
             }
         }
 
-        public static Colors changeColor(Colors color1, Colors color2)
+        Colors PickColor(Colors color1, Colors color2)
         {
-            foreach (Colors color in Enum.GetValues(typeof(Colors)))
+            foreach (Colors colorWalker in Enum.GetValues(typeof(Colors)))
             {
-                if (color != color1 && color != color2)
-                {
-                    return color;
-                }
+                if (colorWalker != color1 && colorWalker != color2)
+                    return colorWalker;
             }
 
             throw new InvalidOperationException("Invalid combination of colors.");
