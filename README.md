@@ -7,8 +7,6 @@ One day, two hedgehogs of different colors meet by chance, and then they both ch
 The task of the program, or rather objects of the `Playground` class, is to determine the most effective meeting plan for hedgehogs.
 
 To start using this program you can simply create `Playground` instance and launch `PlanMeetings()` public method.
-
-
 **Example**:
 ```
 Playground happyHedgehogs = new Playground(0, [8, 1, 9]);
@@ -35,7 +33,7 @@ This is a single case method that outputs to the console only the number of hedg
 **Return**:
 
 `Playground` - object that was tested.
-
+\n
 
 `TestPlaygroundHedgehogs(int[], int)` method
 
