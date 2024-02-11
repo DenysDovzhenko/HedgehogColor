@@ -14,6 +14,7 @@ Console.WriteLine(happyHedgehogs.PlanMeetings());
 ```
 
 Having trouble reading code quickly? Check out the tips below.
+If you want to know my thoughts on the current and possible future state of this code, see the last section of **NOTES**.
 
 # Testing
 For testing, I use methods that have already been written, you can use them for your own tests, or you can simply check the operation of the `Playground` class object yourself. 
