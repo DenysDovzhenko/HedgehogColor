@@ -7,9 +7,9 @@
         public Colors DesiredColor { get; }
         public List<Hedgehog> Hedgehogs { get; }
 
-        public Playground(int desiredColor, int[] hedgehogNumbers)
+        public Playground(int[] hedgehogNumbers, int desiredColor)
         {
-            ValidateInputs(desiredColor, hedgehogNumbers);
+            ValidateInputs(hedgehogNumbers, desiredColor);
 
             this.DesiredColor = (Colors)desiredColor;
             this.HedgehogColors = hedgehogNumbers;
@@ -51,7 +51,7 @@
             return desiredHedgehogsNumber == writtenHedgehogsNumber;
         }
 
-        void ValidateInputs(int desiredColor, int[] hedgehogNumbers)
+        void ValidateInputs(int[] hedgehogNumbers, int desiredColor)
         {
             if (desiredColor < 0 || desiredColor >= Enum.GetValues(typeof(Colors)).Length)
             {
@@ -108,12 +108,22 @@
             return numOfMeetings;
         }
 
-        void HedgehogsMeetings(List<Hedgehog> allHedgehogs, OtherColors hedgehogColors, int meetingsNum, int mainColor)
+        void HedgehogsMeeting(List<Hedgehog> fullGroup, OtherColors hedgehogColors, int mainColor)
         {
-            ChangeHedgehogsNumber(meetingsNum, mainColor, hedgehogColors);
+            ChangeHedgehogsNumber(hedgehogColors, 1, mainColor);
 
-            var firstGroup = GetHedgehogGroup(allHedgehogs, (Colors)hedgehogColors.First, meetingsNum);
-            var secondGroup = GetHedgehogGroup(allHedgehogs, (Colors)hedgehogColors.Second, meetingsNum);
+            Hedgehog first = GetHedgehog(fullGroup, (Colors)hedgehogColors.First);
+            Hedgehog second = GetHedgehog(fullGroup, (Colors)hedgehogColors.Second);
+
+            first.MeetHedgehog(second);
+        }
+
+        void HedgehogsMeetings(List<Hedgehog> fullGroup, OtherColors hedgehogColors, int meetingsNum, int mainColor)
+        {
+            ChangeHedgehogsNumber(hedgehogColors, meetingsNum, mainColor);
+
+            var firstGroup = GetHedgehogGroup(fullGroup, (Colors)hedgehogColors.First, meetingsNum);
+            var secondGroup = GetHedgehogGroup(fullGroup, (Colors)hedgehogColors.Second, meetingsNum);
 
             var zippedGroups = firstGroup.Zip(secondGroup, (first, second) => new { First = first, Second = second });
 
@@ -123,16 +133,6 @@
             }
         }
         
-        void HedgehogsMeeting(List<Hedgehog> allHedgehogs, OtherColors hedgehogColors, int mainColor)
-        {
-            ChangeHedgehogsNumber(1, mainColor, hedgehogColors);
-
-            Hedgehog first = GetHedgehog(allHedgehogs, (Colors)hedgehogColors.First);
-            Hedgehog second = GetHedgehog(allHedgehogs, (Colors)hedgehogColors.Second);
-
-            first.MeetHedgehog(second);
-        }
-
         Hedgehog GetHedgehog(List<Hedgehog> fullGroup, Colors wantedColor)
         {
             return fullGroup.First(hedgehog => hedgehog.color == wantedColor);
@@ -143,16 +143,16 @@
             return fullGroup.Where(hedgehog => hedgehog.color == wantedColor).Take(takeNum);
         }
 
-        void ChangeHedgehogsNumber(int meetingsNumber, int mainColor, OtherColors otherColors)
+        void ChangeHedgehogsNumber(OtherColors otherColors, int meetingsNum, int mainColor)
         {
-            this.HedgehogColors[otherColors.First] -= meetingsNumber;
-            this.HedgehogColors[otherColors.Second] -= meetingsNumber;
-            this.HedgehogColors[mainColor] += meetingsNumber * 2;
+            this.HedgehogColors[otherColors.First] -= meetingsNum;
+            this.HedgehogColors[otherColors.Second] -= meetingsNum;
+            this.HedgehogColors[mainColor] += meetingsNum * 2;
         }
 
-        OtherColors HedgehogOutsidersColor(Colors MainColor)
+        OtherColors HedgehogOutsidersColor(Colors mainColor)
         {
-            switch (MainColor)
+            switch (mainColor)
             {
                 case Colors.Red:
                     return new OtherColors((int)Colors.Green, (int)Colors.Blue);
@@ -161,7 +161,7 @@
                 case Colors.Blue:
                     return new OtherColors((int)Colors.Red, (int)Colors.Green);
                 default:
-                    throw new ArgumentException("Invalid color");
+                    throw new ArgumentException("Invalid color.");
             }
         }
 

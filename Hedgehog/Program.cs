@@ -13,20 +13,20 @@
             // TestPlaygrounds([10, 10, 10], 0, TestPlayground);
 
             // Uncoment next line to do full test
-            // TestPlaygroundRealHedgehogs([10, 10, 10], 0);
+            // TestPlaygroundHedgehogs([10, 10, 7], 0);
 
             // Uncoment next line to do full test for several cases 
-            // TestPlaygrounds([5, 5, 5], 1, TestPlaygroundRealHedgehogs);
+            // TestPlaygrounds([5, 5, 5], 1, TestPlaygroundHedgehogs);
         }
 
-        static void TestPlaygrounds(int[] hedgehogsNum, int color, testMethod test)
+        static void TestPlaygrounds(int[] hedgehogsCount, int color, testMethod test)
         {
             int testNum = 1;
-            for (int redNum = 1; redNum <= hedgehogsNum[0]; redNum++)
+            for (int redNum = 1; redNum <= hedgehogsCount[0]; redNum++)
             {
-                for (int greenNum = 1; greenNum <= hedgehogsNum[1]; greenNum++)
+                for (int greenNum = 1; greenNum <= hedgehogsCount[1]; greenNum++)
                 {
-                    for (int blueNum = 1; blueNum <= hedgehogsNum[2]; blueNum++)
+                    for (int blueNum = 1; blueNum <= hedgehogsCount[2]; blueNum++)
                     {
                         Console.WriteLine($"TEST #{ testNum++ }");
                         test([redNum, greenNum, blueNum], color);
@@ -35,7 +35,7 @@
             }
         }
 
-        static Playground TestPlaygroundRealHedgehogs(int[] hedgehogsNum, int color)
+        static Playground TestPlaygroundHedgehogs(int[] hedgehogsNum, int color)
         {
             Playground playground = TestPlayground(hedgehogsNum, color);
 
@@ -62,7 +62,7 @@
             Console.WriteLine($"\tGreen: { hedgehogsNum[1] }");
             Console.WriteLine($"\tBlue: { hedgehogsNum[2] }");
 
-            Playground happyHedgehogs = new Playground(color, hedgehogsNum);
+            Playground happyHedgehogs = new Playground(hedgehogsNum, color);
             int result = happyHedgehogs.PlanMeetings(); 
 
             Console.WriteLine($"The minimum number of meetings required for little cheerful hedgehogs: { result }");

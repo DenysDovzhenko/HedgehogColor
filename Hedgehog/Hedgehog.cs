@@ -2,7 +2,7 @@
 {
     class Hedgehog
     {
-        public Colors color {  get; set; }
+        public Colors color { get; set; }
 
         public Hedgehog(Colors color)
         {
