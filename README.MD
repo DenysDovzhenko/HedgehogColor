@@ -340,3 +340,4 @@ It is custom exception derived from `System.Exception` with default implementati
 * My next idea for improving the code is to define the action of the hedgehogs at the moment they meet using the delegate. The method definition for this delegate could be when creating the hedgehog object.
 * It is possible to increase code security by adding more exceptions.
 * This may affect the readability of the code, but it is possible to replace the immediate `HedgehogMeeting()` with storing the number of changes that will simply execute `HedgehogsMeeting()`, which will be faster than calling `HedgehogMeeting()` multiple times.
+* Currently, the code can only work with hedgehogs of three colors, but there is an opportunity to improve the code to increase their varieties.
