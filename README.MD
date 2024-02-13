@@ -255,7 +255,7 @@ An abstraction of checking the equality of two numbers, when hedgehogs can alrea
 `bool` - true if `groupNumber1` equal `groupNumber2`, otherwise false.
 
 
-### CanMergeIntoOneColor(int, int) private method
+### CantMergeIntoOneColor(int, int) private method
 
 Checks whether there are ways to solve the problem.
 
