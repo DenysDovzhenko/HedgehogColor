@@ -97,7 +97,7 @@
             Console.WriteLine("Enter the number of green hedgehogs.");
             userArray[1] = ValidateUserInput("0..int.MaxValue");
             Console.WriteLine("Enter the number of blue hedgehogs.");
-            userArray[2] = ValidateUserInput("0..int.MaxValue");
+            userArray[2] = ValidateUserInput(userArray[0] <= 0 && userArray[1] <= 0 ? "1..int.MaxValue": "0..int.MaxValue");
 
             return userArray;
         }

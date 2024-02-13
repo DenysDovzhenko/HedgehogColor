@@ -22,6 +22,51 @@ For testing, I use methods that have already been written, you can use them for 
 The defined single-case testing methods return a `Playground` object, which allows you to continue experimenting with it.
 
 `testMethod(int[], int)` delegate
+### ConsoleInput() method
+
+This is a method of initializing user input with short manual.
+
+
+### UserConsoleInput() method
+
+This is a method of checking whether the user is following the manual and launches chosen test method.
+
+**Return**:
+
+`bool` - `true`, if user entered wrong value, otherwise `false`.
+
+
+### UserArrayInput() method
+
+This is a method for getting input data about the number of hedgehogs in the form of the array.
+
+**Return**:
+
+`Int32[]` - User-entered array.
+
+
+### UserColorInput() method
+
+This is a method for getting input data about the desirable hedgehog color.
+
+**Return**:
+
+`int` - desirable hedgehog color index .
+
+
+### ValidateUserInput(string) method
+
+This is a method of validating input data for integer values.
+
+**Params**:
+
+`tip` - `string` object, is used to display the correct tooltip.
+
+**Return**:
+
+`int` - entered integer value.
+
+
 ### TestPlayground(int[], int) method
 
 This is a single case method that outputs to the console only the number of hedgehog encounters based on the input data.
@@ -52,7 +97,7 @@ This is a single case method that outputs to the console the number of hedgehog 
 
 ### TestPlaygrounds(int[], int, testMethod) method
 
-This is a method that iterates over all variants of each color from 1 to the color value of the array and prints tests result to the console.
+This is a method that iterates over all variants of each color from 0 (if possible) to the color value of the array and prints tests result to the console.
 
 For me, it was convenient to use this method, but it's true that it's not perfect and will definitely not be convenient for many (`hedgehogsCount`).
 
