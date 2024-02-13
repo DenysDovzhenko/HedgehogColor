@@ -6,30 +6,46 @@
     {
         static void Main(string[] args)
         {
+            // Simple program run
+            // Playground happyHedgehogs = new Playground([34, 32, 35], 0); // Paste input data here
+            // int result = happyHedgehogs.PlanMeetings(); // Get output data here
+            // Console.WriteLine(result); // Print output
+
+            /* CUSTOM TESTS */
+
             // Uncoment next line to test main functionality
-            // TestPlayground([10, 10, 10], 0);
+            // TestPlayground([0, 0, 17], 0);
+            // TestPlayground([34, 32, 35], 0);
 
             // Uncoment next line to test main functionality for several cases
-            // TestPlaygrounds([10, 10, 10], 0, TestPlayground);
+            // TestPlaygrounds([0, 0, 17], 0, TestPlayground);
+            // TestPlaygrounds([0, 0, 0], 0, TestPlayground);
 
             // Uncoment next line to do full test
-            // TestPlaygroundHedgehogs([10, 10, 7], 0);
+            // TestPlaygroundHedgehogs([0, 0, 17], 1);
+            // TestPlaygroundHedgehogs([34, 32, 35], 1);
 
             // Uncoment next line to do full test for several cases 
-            // TestPlaygrounds([5, 5, 5], 1, TestPlaygroundHedgehogs);
+            // TestPlaygrounds([0, 0, 17], 1, TestPlaygroundHedgehogs);
+            // TestPlaygrounds([34, 32, 35], 1, TestPlaygroundHedgehogs);
         }
 
         static void TestPlaygrounds(int[] hedgehogsCount, int color, testMethod test)
         {
+            Playground.ValidateInputs(hedgehogsCount, color);
+
             int testNum = 1;
-            for (int redNum = 1; redNum <= hedgehogsCount[0]; redNum++)
+            for (int redNum = 0; redNum <= hedgehogsCount[0]; redNum++)
             {
-                for (int greenNum = 1; greenNum <= hedgehogsCount[1]; greenNum++)
+                for (int greenNum = 0; greenNum <= hedgehogsCount[1]; greenNum++)
                 {
-                    for (int blueNum = 1; blueNum <= hedgehogsCount[2]; blueNum++)
+                    for (int blueNum = 0; blueNum <= hedgehogsCount[2]; blueNum++)
                     {
-                        Console.WriteLine($"TEST #{ testNum++ }");
-                        test([redNum, greenNum, blueNum], color);
+                        if (redNum + greenNum + blueNum >= 1)
+                        {
+                            Console.WriteLine($"TEST #{ testNum++ }");
+                            test([redNum, greenNum, blueNum], color);
+                        }
                     }
                 }
             }
@@ -63,7 +79,7 @@
             Console.WriteLine($"\tBlue: { hedgehogsNum[2] }");
 
             Playground happyHedgehogs = new Playground(hedgehogsNum, color);
-            int result = happyHedgehogs.PlanMeetings(); 
+            int result = happyHedgehogs.PlanMeetings();
 
             Console.WriteLine($"The minimum number of meetings required for little cheerful hedgehogs: { result }");
             

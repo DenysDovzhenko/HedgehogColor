@@ -51,7 +51,7 @@
             return desiredHedgehogsNumber == writtenHedgehogsNumber;
         }
 
-        void ValidateInputs(int[] hedgehogNumbers, int desiredColor)
+        public static void ValidateInputs(int[] hedgehogNumbers, int desiredColor)
         {
             if (desiredColor < 0 || desiredColor >= Enum.GetValues(typeof(Colors)).Length)
             {
