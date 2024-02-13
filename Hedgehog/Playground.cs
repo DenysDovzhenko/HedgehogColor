@@ -6,7 +6,7 @@
         public int[] HedgehogColors { get; }
         public Colors DesiredColor { get; }
         public List<Hedgehog> Hedgehogs { get; }
-
+    
         public Playground(int[] hedgehogNumbers, int desiredColor)
         {
             ValidateInputs(hedgehogNumbers, desiredColor);
@@ -33,7 +33,7 @@
                 HedgehogsMeetings(this.Hedgehogs, colors, this.MeetNumber, (int)this.DesiredColor);
                 return this.MeetNumber;
             }
-            else if (CanMergeIntoOneColor(this.HedgehogColors[colors.First], this.HedgehogColors[colors.Second]))
+            else if (CantMergeIntoOneColor(this.HedgehogColors[colors.First], this.HedgehogColors[colors.Second]))
             {
                 return this.MeetNumber = impossibleMeetings;
             }
@@ -68,7 +68,7 @@
                 throw new ArgumentException("Invalid number of hedgehog colors provided", nameof(hedgehogNumbers));
             }
 
-            if (hedgehogNumbers.Sum() < 1 && hedgehogNumbers.Sum() > int.MaxValue)
+            if (hedgehogNumbers.Sum() < 1 || hedgehogNumbers.Sum() > int.MaxValue)
             {
                 throw new ArgumentException("Sum of hedgehog numbers should be between 1 and int.MaxValue.", nameof(hedgehogNumbers));
             }
@@ -128,9 +128,7 @@
             var zippedGroups = firstGroup.Zip(secondGroup, (first, second) => new { First = first, Second = second });
 
             foreach (var pair in zippedGroups)
-            {
                 pair.First.MeetHedgehog(pair.Second);
-            }
         }
         
         Hedgehog GetHedgehog(List<Hedgehog> fullGroup, Colors wantedColor)
@@ -167,19 +165,19 @@
 
         bool ThereAreOneColorHedgehogs()
         {
-            return Hedgehogs.Count == HedgehogColors[(int)DesiredColor];
+            return Array.Exists(HedgehogColors, num => num == Hedgehogs.Count);
         }
 
-        bool OtherHedgehogsHavePairs(int groupNumber1, int groupNumber2)
+        bool OtherHedgehogsHavePairs(params int[] hedgehogsNum)
         {
-            return groupNumber1 == groupNumber2;
+            int first = hedgehogsNum[0];
+            return hedgehogsNum.Skip(1).All(elem => elem == first);
         }
 
-        bool CanMergeIntoOneColor(int groupNumber1, int groupNumber2)
+        bool CantMergeIntoOneColor(int groupNumber1, int groupNumber2)
         {
-            const int unacceptableDifferenceDivisor = 3;
             int difference = Math.Abs(groupNumber1 - groupNumber2);
-            return difference % unacceptableDifferenceDivisor != 0;
+            return difference % this.HedgehogColors.Length != 0;
         }
     }
 } 
